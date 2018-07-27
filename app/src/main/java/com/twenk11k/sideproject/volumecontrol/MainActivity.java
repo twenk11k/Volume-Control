@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onProgressChanged(SeekBar arg0, int progress, boolean arg2)
                 {
+                    Log.d("progres_changed",String.valueOf(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)));
+
                     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-                            progress, 0);
+                            progress, AudioManager.FLAG_PLAY_SOUND);
                 }
             });
         }

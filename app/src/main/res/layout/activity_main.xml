@@ -5,13 +5,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#222"
     tools:context=".MainActivity">
-
-   <SeekBar
+   <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
+       android:paddingTop="20dp"
+       android:layout_marginLeft="10dp"
+       android:layout_marginRight="10dp"
+       >
+   <ImageView
+       android:layout_width="20dp"
+       android:src="@drawable/baseline_music_note_white_24"
+       android:layout_height="20dp" />
+   <SeekBar
+       android:layout_width="match_parent"
+       android:layout_height="20dp"
        android:id="@+id/seekbar"
-       android:layout_marginTop="20dp"
        />
-
+   </LinearLayout>
 </android.support.constraint.ConstraintLayout>
