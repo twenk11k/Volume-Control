@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         try
         {
             seekBarVolume = (SeekBar)findViewById(R.id.seekbar);
+            seekBarVolume.setSecondaryProgress(100);
             audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
             seekBarVolume.setMax(audioManager
                     .getStreamMaxVolume(AudioManager.STREAM_MUSIC));
