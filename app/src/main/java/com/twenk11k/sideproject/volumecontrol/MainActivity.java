@@ -22,10 +22,6 @@ public class MainActivity extends AppCompatActivity implements OnAudioVolumeChan
         setContentView(R.layout.activity_main);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         setSeekBar();
-        if (mAudioVolumeObserver == null) {
-            mAudioVolumeObserver = new AudioVolumeObserver(this);
-        }
-        mAudioVolumeObserver.register(AudioManager.STREAM_MUSIC, this);
 
     }
 
@@ -46,6 +42,11 @@ public class MainActivity extends AppCompatActivity implements OnAudioVolumeChan
                         .getStreamVolume(AudioManager.STREAM_MUSIC));
             }
         }
+        if (mAudioVolumeObserver == null) {
+            mAudioVolumeObserver = new AudioVolumeObserver(this);
+        }
+        mAudioVolumeObserver.register(AudioManager.STREAM_MUSIC, this);
+
     }
 
     private void setSeekBar() {
