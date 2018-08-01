@@ -7,17 +7,34 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.SeekBar;
 
-public class MainActivity extends AppCompatActivity {
+import com.twenk11k.sideproject.volumecontrol.listener.OnAudioVolumeChangedListener;
+
+public class MainActivity extends AppCompatActivity implements OnAudioVolumeChangedListener {
 
     private SeekBar seekBarVolume = null;
     private AudioManager audioManager = null;
     private int sbarProgress = 0;
+    private AudioVolumeObserver mAudioVolumeObserver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         setSeekBar();
+        if (mAudioVolumeObserver == null) {
+            mAudioVolumeObserver = new AudioVolumeObserver(this);
+        }
+        mAudioVolumeObserver.register(AudioManager.STREAM_MUSIC, this);
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mAudioVolumeObserver != null) {
+            mAudioVolumeObserver.unregister();
+        }
     }
 
     @Override
@@ -70,4 +87,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onAudioVolumeChanged(int currentVolume, int maxVolume) {
+        if(seekBarVolume!=null){
+                seekBarVolume.setProgress(currentVolume);
+        }
+    }
 }
