@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SeekBar seekBarVolume = null;
     private AudioManager audioManager = null;
+    private int sbarProgress = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +19,18 @@ public class MainActivity extends AppCompatActivity {
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         setSeekBar();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(seekBarVolume!=null){
+            if(audioManager!=null){
+                seekBarVolume.setProgress(audioManager
+                        .getStreamVolume(AudioManager.STREAM_MUSIC));
+            }
+        }
+    }
+
     private void setSeekBar() {
         try
         {
@@ -33,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onStopTrackingTouch(SeekBar arg0)
                 {
+                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
+                            sbarProgress, AudioManager.FLAG_PLAY_SOUND);
                 }
 
                 @Override
@@ -44,9 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onProgressChanged(SeekBar arg0, int progress, boolean arg2)
                 {
                     Log.d("progres_changed",String.valueOf(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)));
+                    sbarProgress = progress;
 
-                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-                            progress, AudioManager.FLAG_PLAY_SOUND);
                 }
             });
         }
