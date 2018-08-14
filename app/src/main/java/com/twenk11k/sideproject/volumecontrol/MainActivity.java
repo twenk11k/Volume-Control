@@ -129,14 +129,13 @@ public class MainActivity extends AppCompatActivity implements OnAudioVolumeChan
                 } else {
 
                     sbarProgress = Utils.getSeekbarProgress(this);
-
+                    Log.d("sbarprogressval",String.valueOf(sbarProgress));
                     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
                             sbarProgress, AudioManager.FLAG_PLAY_SOUND);
-
+                    seekBarVolume.setProgress(sbarProgress);
                     musicNote.setImageDrawable(musicNoteD);
                 }
                 break;
         }
-
     }
 }
