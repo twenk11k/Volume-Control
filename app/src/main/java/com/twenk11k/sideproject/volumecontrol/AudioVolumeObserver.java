@@ -3,7 +3,7 @@ package com.twenk11k.sideproject.volumecontrol;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Handler;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.twenk11k.sideproject.volumecontrol.listener.OnAudioVolumeChangedListener;
 

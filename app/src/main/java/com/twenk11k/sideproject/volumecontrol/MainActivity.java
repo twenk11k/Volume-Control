@@ -3,7 +3,7 @@ package com.twenk11k.sideproject.volumecontrol;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
