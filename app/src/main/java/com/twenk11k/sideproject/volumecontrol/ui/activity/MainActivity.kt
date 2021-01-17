@@ -44,7 +44,6 @@ class MainActivity : DataBindingActivity(), OnAudioVolumeChangedListener {
     private fun setDrawables() {
         musicNoteDrawable = ContextCompat.getDrawable(this, R.drawable.baseline_music_note_white_24)
         musicOffDrawable = ContextCompat.getDrawable(this, R.drawable.baseline_music_off_white_24)
-
     }
 
     private fun setViewListeners() {
@@ -105,7 +104,7 @@ class MainActivity : DataBindingActivity(), OnAudioVolumeChangedListener {
             seekBar.progress = currentVol
             handleIcon(currentVol)
         }
-        if(audioVolumeObserver == null)
+        if (audioVolumeObserver == null)
             audioVolumeObserver = AudioVolumeObserver(this)
 
         audioVolumeObserver?.register(AudioManager.STREAM_MUSIC, this)
@@ -123,6 +122,5 @@ class MainActivity : DataBindingActivity(), OnAudioVolumeChangedListener {
         seekBar.progress = currentVolume
         handleIcon(currentVolume)
     }
-
 
 }
