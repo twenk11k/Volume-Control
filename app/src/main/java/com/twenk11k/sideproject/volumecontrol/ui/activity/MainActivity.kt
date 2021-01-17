@@ -33,6 +33,24 @@ class MainActivity : DataBindingActivity(), OnAudioVolumeChangedListener {
         setViews()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (audioManager != null) {
+            val currentVol = audioManager!!.getStreamVolume(AudioManager.STREAM_MUSIC)
+            seekBar.progress = currentVol
+            handleIcon(currentVol)
+        }
+        if (audioVolumeObserver == null)
+            audioVolumeObserver = AudioVolumeObserver(this)
+
+        audioVolumeObserver?.register(AudioManager.STREAM_MUSIC, this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        audioVolumeObserver?.unregister()
+    }
+
     private fun setViews() {
         seekBar = binding.seekBar
         imageMusicNote = binding.imageMusicNote
@@ -90,24 +108,6 @@ class MainActivity : DataBindingActivity(), OnAudioVolumeChangedListener {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        audioVolumeObserver?.unregister()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (audioManager != null) {
-            val currentVol = audioManager!!.getStreamVolume(AudioManager.STREAM_MUSIC)
-            seekBar.progress = currentVol
-            handleIcon(currentVol)
-        }
-        if (audioVolumeObserver == null)
-            audioVolumeObserver = AudioVolumeObserver(this)
-
-        audioVolumeObserver?.register(AudioManager.STREAM_MUSIC, this)
     }
 
     private fun handleIcon(currentVol: Int) {
