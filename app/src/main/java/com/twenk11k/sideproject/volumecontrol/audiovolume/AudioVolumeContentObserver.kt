@@ -4,7 +4,7 @@ import android.database.ContentObserver
 import android.media.AudioManager
 import android.os.Handler
 
-class AudioVolumeContentObserver(private val handler: Handler, private val audioManager: AudioManager, private val audioStreamType: Int, private val listener: OnAudioVolumeChangedListener): ContentObserver(handler) {
+class AudioVolumeContentObserver(handler: Handler, private val audioManager: AudioManager, private val audioStreamType: Int, private val listener: OnAudioVolumeChangedListener) : ContentObserver(handler) {
 
     private var lastVolume = audioManager.getStreamVolume(audioStreamType)
 
