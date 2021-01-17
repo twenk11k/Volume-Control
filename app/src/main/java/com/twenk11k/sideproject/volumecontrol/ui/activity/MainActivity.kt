@@ -20,7 +20,7 @@ class MainActivity : DataBindingActivity(), OnAudioVolumeChangedListener {
     private lateinit var imageMusicNote: ImageView
 
     private var audioManager: AudioManager? = null
-    private var sbarProgress = 0
+    private var sBarProgress = 0
     private var audioVolumeObserver: AudioVolumeObserver? = null
     private var musicNoteDrawable: Drawable? = null
     private var musicOffDrawable: Drawable? = null
@@ -40,9 +40,9 @@ class MainActivity : DataBindingActivity(), OnAudioVolumeChangedListener {
             seekBar.progress = currentVol
             handleIcon(currentVol)
         }
-        if (audioVolumeObserver == null)
+        if (audioVolumeObserver == null) {
             audioVolumeObserver = AudioVolumeObserver(this)
-
+        }
         audioVolumeObserver?.register(AudioManager.STREAM_MUSIC, this)
     }
 
@@ -67,17 +67,15 @@ class MainActivity : DataBindingActivity(), OnAudioVolumeChangedListener {
     private fun setViewListeners() {
         imageMusicNote.setOnClickListener {
             if (imageMusicNote.drawable == musicNoteDrawable) {
-                preferences.seekBarProgress = sbarProgress
+                preferences.seekBarProgress = sBarProgress
                 seekBar.progress = 0
-                sbarProgress = 0
-                audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC,
-                        sbarProgress, AudioManager.FLAG_PLAY_SOUND)
+                sBarProgress = 0
+                audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC, sBarProgress, AudioManager.FLAG_PLAY_SOUND)
                 imageMusicNote.setImageDrawable(musicOffDrawable)
             } else {
-                sbarProgress = preferences.seekBarProgress
-                audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC,
-                        sbarProgress, AudioManager.FLAG_PLAY_SOUND)
-                seekBar.progress = sbarProgress
+                sBarProgress = preferences.seekBarProgress
+                audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC, sBarProgress, AudioManager.FLAG_PLAY_SOUND)
+                seekBar.progress = sBarProgress
                 imageMusicNote.setImageDrawable(musicNoteDrawable)
             }
         }
@@ -92,7 +90,7 @@ class MainActivity : DataBindingActivity(), OnAudioVolumeChangedListener {
             seekBar.progress = volume
             seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                    sbarProgress = progress
+                    sBarProgress = progress
                     handleIcon(progress)
                 }
 
@@ -100,10 +98,8 @@ class MainActivity : DataBindingActivity(), OnAudioVolumeChangedListener {
                 }
 
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC,
-                            sbarProgress, AudioManager.FLAG_PLAY_SOUND);
+                    audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC, sBarProgress, AudioManager.FLAG_PLAY_SOUND);
                 }
-
             })
         } catch (e: Exception) {
             e.printStackTrace()
