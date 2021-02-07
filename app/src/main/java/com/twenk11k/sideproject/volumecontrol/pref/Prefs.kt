@@ -16,11 +16,15 @@ abstract class Prefs(private val name: String? = null) {
         abstract operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T)
     }
 
-    enum class StorableType {
+    enum class Type {
         Int
     }
 
-    inner class GenericPrefDelegate<T>(prefKey: String? = null, private val defaultValue: T, val type: StorableType) :
+    fun intPref(prefKey: String? = null, defaultValue: Int = 0) =
+            GenericPrefDelegate(prefKey, defaultValue, Type.Int)
+
+    @Suppress("UNCHECKED_CAST")
+    inner class GenericPrefDelegate<T>(prefKey: String? = null, private val defaultValue: T, val type: Type) :
             PrefDelegate<T>(prefKey) {
         override fun getValue(thisRef: Any?, property: KProperty<*>): T =
                 prefs.getInt(prefKey ?: property.name, defaultValue as Int) as T
@@ -30,8 +34,5 @@ abstract class Prefs(private val name: String? = null) {
         }
 
     }
-
-    fun intPref(prefKey: String? = null, defaultValue: Int = 0) =
-            GenericPrefDelegate(prefKey, defaultValue, StorableType.Int)
 
 }
