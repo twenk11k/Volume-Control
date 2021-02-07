@@ -21,7 +21,7 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:id="@+id/image_music_note"
+                android:id="@+id/img_music_note"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="20dp"

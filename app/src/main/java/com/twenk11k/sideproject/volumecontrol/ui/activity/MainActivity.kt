@@ -17,7 +17,7 @@ class MainActivity : DataBindingActivity(), OnAudioVolumeChangedListener {
 
     // views
     private lateinit var seekBar: SeekBar
-    private lateinit var imageMusicNote: ImageView
+    private lateinit var imgMusicNote: ImageView
 
     private var audioManager: AudioManager? = null
     private var sBarProgress = 0
@@ -25,6 +25,7 @@ class MainActivity : DataBindingActivity(), OnAudioVolumeChangedListener {
     private var musicNoteDrawable: Drawable? = null
     private var musicOffDrawable: Drawable? = null
     private val preferences = ProgressPrefs()
+
     private val binding: ActivityMainBinding by binding(R.layout.activity_main)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +54,7 @@ class MainActivity : DataBindingActivity(), OnAudioVolumeChangedListener {
 
     private fun setViews() {
         seekBar = binding.seekBar
-        imageMusicNote = binding.imageMusicNote
+        imgMusicNote = binding.imgMusicNote
         setSeekBar()
         setDrawables()
         setViewListeners()
@@ -65,18 +66,18 @@ class MainActivity : DataBindingActivity(), OnAudioVolumeChangedListener {
     }
 
     private fun setViewListeners() {
-        imageMusicNote.setOnClickListener {
-            if (imageMusicNote.drawable == musicNoteDrawable) {
+        imgMusicNote.setOnClickListener {
+            if (imgMusicNote.drawable == musicNoteDrawable) {
                 preferences.seekBarProgress = sBarProgress
                 seekBar.progress = 0
                 sBarProgress = 0
                 audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC, sBarProgress, AudioManager.FLAG_PLAY_SOUND)
-                imageMusicNote.setImageDrawable(musicOffDrawable)
+                imgMusicNote.setImageDrawable(musicOffDrawable)
             } else {
                 sBarProgress = preferences.seekBarProgress
                 audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC, sBarProgress, AudioManager.FLAG_PLAY_SOUND)
                 seekBar.progress = sBarProgress
-                imageMusicNote.setImageDrawable(musicNoteDrawable)
+                imgMusicNote.setImageDrawable(musicNoteDrawable)
             }
         }
     }
@@ -108,9 +109,9 @@ class MainActivity : DataBindingActivity(), OnAudioVolumeChangedListener {
 
     private fun handleIcon(currentVol: Int) {
         if (currentVol == 0) {
-            imageMusicNote.setImageDrawable(musicOffDrawable)
+            imgMusicNote.setImageDrawable(musicOffDrawable)
         } else {
-            imageMusicNote.setImageDrawable(musicNoteDrawable)
+            imgMusicNote.setImageDrawable(musicNoteDrawable)
         }
     }
 
