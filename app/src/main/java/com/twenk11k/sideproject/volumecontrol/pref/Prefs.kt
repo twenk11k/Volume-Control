@@ -20,8 +20,7 @@ abstract class Prefs(private val name: String? = null) {
         Int
     }
 
-    fun intPref(prefKey: String? = null, defaultValue: Int = 0) =
-            GenericPrefDelegate(prefKey, defaultValue, Type.Int)
+    fun intPref(prefKey: String? = null, defaultValue: Int = 0) = GenericPrefDelegate(prefKey, defaultValue, Type.Int)
 
     @Suppress("UNCHECKED_CAST")
     inner class GenericPrefDelegate<T>(prefKey: String? = null, private val defaultValue: T, val type: Type) :
@@ -32,7 +31,6 @@ abstract class Prefs(private val name: String? = null) {
         override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
             prefs.edit().putInt(prefKey ?: property.name, value as Int).apply()
         }
-
     }
 
 }

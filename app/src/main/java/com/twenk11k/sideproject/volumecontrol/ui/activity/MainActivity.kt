@@ -83,28 +83,23 @@ class MainActivity : DataBindingActivity(), OnAudioVolumeChangedListener {
     }
 
     private fun setSeekBar() {
-        try {
-            seekBar.secondaryProgress = 100
-            audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-            seekBar.max = audioManager!!.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-            val volume = audioManager!!.getStreamVolume(AudioManager.STREAM_MUSIC)
-            seekBar.progress = volume
-            seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                    sBarProgress = progress
-                    handleIcon(progress)
-                }
+        seekBar.secondaryProgress = 100
+        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        seekBar.max = audioManager!!.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        val volume = audioManager!!.getStreamVolume(AudioManager.STREAM_MUSIC)
+        seekBar.progress = volume
+        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                sBarProgress = progress
+                handleIcon(progress)
+            }
 
-                override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
 
-                override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC, sBarProgress, AudioManager.FLAG_PLAY_SOUND);
-                }
-            })
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC, sBarProgress, AudioManager.FLAG_PLAY_SOUND);
+            }
+        })
     }
 
     private fun handleIcon(currentVol: Int) {
