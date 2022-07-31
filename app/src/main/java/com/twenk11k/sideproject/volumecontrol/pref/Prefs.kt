@@ -16,10 +16,6 @@ abstract class Prefs(private val name: String? = null) {
         abstract operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T)
     }
 
-    enum class Type {
-        Int
-    }
-
     fun intPref(prefKey: String? = null, defaultValue: Int = 0) =
         GenericPrefDelegate(prefKey, defaultValue)
 
