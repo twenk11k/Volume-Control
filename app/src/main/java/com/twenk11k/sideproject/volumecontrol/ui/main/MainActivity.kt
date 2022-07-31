@@ -111,11 +111,7 @@ class MainActivity : AppCompatActivity(), OnAudioVolumeChangedListener {
     }
 
     private fun handleIcon(currentVol: Int) {
-        if (currentVol == 0) {
-            binding.imgMusicNote.setImageDrawable(musicOffDrawable)
-        } else {
-            binding.imgMusicNote.setImageDrawable(musicNoteDrawable)
-        }
+        binding.imgMusicNote.setImageDrawable(if (currentVol == 0) musicOffDrawable else musicNoteDrawable)
     }
 
     override fun onAudioVolumeChanged(currentVolume: Int, maxVolume: Int) {
