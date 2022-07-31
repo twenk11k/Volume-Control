@@ -1,40 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:background="@color/black_1"
+    tools:context=".ui.activity.MainActivity">
 
-    <data>
-
-        <import type="android.view.View" />
-
-    </data>
-
-    <FrameLayout xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:background="@color/black_1"
-        tools:context=".ui.activity.MainActivity">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:paddingTop="20dp">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/img_music_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:src="@drawable/baseline_music_note_white_24" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:paddingTop="20dp">
+            android:padding="20dp" />
 
-            <ImageView
-                android:id="@+id/img_music_note"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:src="@drawable/baseline_music_note_white_24" />
+    </LinearLayout>
 
-            <SeekBar
-                android:id="@+id/seekBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="20dp" />
-
-        </LinearLayout>
-
-    </FrameLayout>
-
-</layout>
+</FrameLayout>
