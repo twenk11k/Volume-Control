@@ -1,4 +1,4 @@
-package com.twenk11k.sideproject.volumecontrol.ui.activity
+package com.twenk11k.sideproject.volumecontrol.ui.main
 
 import android.content.Context
 import android.graphics.drawable.Drawable
