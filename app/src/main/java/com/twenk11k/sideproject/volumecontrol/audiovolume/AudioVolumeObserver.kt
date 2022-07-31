@@ -8,21 +8,26 @@ import android.provider.Settings
 
 class AudioVolumeObserver(private val context: Context) {
 
-    private var audioManager: AudioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+    private var audioManager: AudioManager =
+        context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     private var audioVolumeContentObserver: AudioVolumeContentObserver? = null
 
-    fun register(audioStreamType: Int,
-                 listener: OnAudioVolumeChangedListener) {
+    fun register(
+        audioStreamType: Int,
+        listener: OnAudioVolumeChangedListener
+    ) {
         val handler = Handler(Looper.getMainLooper())
         audioVolumeContentObserver = AudioVolumeContentObserver(
-                handler,
-                audioManager,
-                audioStreamType,
-                listener)
+            handler,
+            audioManager,
+            audioStreamType,
+            listener
+        )
         context.contentResolver.registerContentObserver(
-                Settings.System.CONTENT_URI,
-                true,
-                audioVolumeContentObserver!!)
+            Settings.System.CONTENT_URI,
+            true,
+            audioVolumeContentObserver!!
+        )
     }
 
     fun unregister() {
@@ -31,5 +36,4 @@ class AudioVolumeObserver(private val context: Context) {
             audioVolumeContentObserver = null
         }
     }
-
 }

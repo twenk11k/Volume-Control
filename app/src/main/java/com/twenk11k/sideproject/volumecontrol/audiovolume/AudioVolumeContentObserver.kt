@@ -16,5 +16,4 @@ class AudioVolumeContentObserver(handler: Handler, private val audioManager: Aud
             listener.onAudioVolumeChanged(currentVolume, maxVolume)
         }
     }
-
 }

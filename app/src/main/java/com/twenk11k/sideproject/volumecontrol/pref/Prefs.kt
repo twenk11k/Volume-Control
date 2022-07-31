@@ -20,17 +20,20 @@ abstract class Prefs(private val name: String? = null) {
         Int
     }
 
-    fun intPref(prefKey: String? = null, defaultValue: Int = 0) = GenericPrefDelegate(prefKey, defaultValue, Type.Int)
+    fun intPref(prefKey: String? = null, defaultValue: Int = 0) =
+        GenericPrefDelegate(prefKey, defaultValue)
 
     @Suppress("UNCHECKED_CAST")
-    inner class GenericPrefDelegate<T>(prefKey: String? = null, private val defaultValue: T, val type: Type) :
-            PrefDelegate<T>(prefKey) {
+    inner class GenericPrefDelegate<T>(
+        prefKey: String? = null,
+        private val defaultValue: T
+    ) :
+        PrefDelegate<T>(prefKey) {
         override fun getValue(thisRef: Any?, property: KProperty<*>): T =
-                prefs.getInt(prefKey ?: property.name, defaultValue as Int) as T
+            prefs.getInt(prefKey ?: property.name, defaultValue as Int) as T
 
         override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
             prefs.edit().putInt(prefKey ?: property.name, value as Int).apply()
         }
     }
-
 }
